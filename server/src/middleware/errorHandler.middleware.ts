@@ -6,7 +6,6 @@ import {
   isOperationalError,
   sanitizeErrorMessage,
 } from '../utils/errorFormatter';
-import mongoose from 'mongoose';
 import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 
 /**
@@ -57,26 +56,28 @@ const handleSpecificErrors = (error: Error | AppError): Error | AppError => {
     return error;
   }
 
-  // Mongoose validation error
-  if (error instanceof mongoose.Error.ValidationError) {
-    const messages = Object.values(error.errors).map((err) => err.message);
-    const AppError = require('../utils/errors').ValidationError;
-    return new AppError(messages.join(', '));
-  }
-
-  // Mongoose duplicate key error
-  if ((error as any).code === 11000) {
-    const field = Object.keys((error as any).keyPattern || {})[0];
+  // Prisma validation error
+  if ((error as any).code === 'P2002') {
     const AppError = require('../utils/errors').ConflictError;
-    return new AppError(
-      field ? `${field} already exists` : 'Duplicate entry'
-    );
+    return new AppError('Duplicate entry - record already exists');
   }
 
-  // Mongoose cast error (invalid ObjectId)
-  if (error instanceof mongoose.Error.CastError) {
+  // Prisma foreign key constraint error
+  if ((error as any).code === 'P2003') {
     const AppError = require('../utils/errors').BadRequestError;
-    return new AppError(`Invalid ${error.path}: ${error.value}`);
+    return new AppError('Invalid reference - related record not found');
+  }
+
+  // Prisma record not found error
+  if ((error as any).code === 'P2025') {
+    const AppError = require('../utils/errors').NotFoundError;
+    return new AppError('Record not found');
+  }
+
+  // Prisma connection error
+  if ((error as any).code === 'P1001') {
+    const AppError = require('../utils/errors').InternalServerError;
+    return new AppError('Database connection failed');
   }
 
   // JWT errors

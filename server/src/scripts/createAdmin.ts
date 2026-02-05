@@ -1,5 +1,4 @@
-import mongoose from 'mongoose';
-import Admin from '../models/Admin.model';
+import { prisma } from '../models/Admin.model';
 import { hashPassword } from '../services/password.service';
 import config from '../config/env.config';
 
@@ -12,23 +11,26 @@ const createAdmin = async () => {
   try {
     console.log('🔧 Creating admin user...\n');
 
-    // Connect to MongoDB
-    console.log('🔄 Connecting to MongoDB...');
-    await mongoose.connect(config.mongodbUri);
-    console.log('✅ Connected to MongoDB\n');
+    // Connect to PostgreSQL
+    console.log('🔄 Connecting to PostgreSQL...');
+    await prisma.$connect();
+    console.log('✅ Connected to PostgreSQL\n');
 
     // Admin details
-    const adminEmail = 'admin@politikos.com';
+    const adminEmail = 'admin@mrrwebsite.com';
     const adminPassword = 'Admin123!'; // Change this to a secure password
-    const adminRole = 'super_admin';
+    const adminRole = 'super_admin' as const;
 
     // Check if admin already exists
-    const existingAdmin = await Admin.findOne({ email: adminEmail });
+    const existingAdmin = await prisma.admin.findUnique({ 
+      where: { email: adminEmail } 
+    });
+    
     if (existingAdmin) {
       console.log('⚠️  Admin user already exists!');
       console.log(`📧 Email: ${adminEmail}`);
       console.log('💡 Use this email to login to the admin dashboard\n');
-      await mongoose.connection.close();
+      await prisma.$disconnect();
       return;
     }
 
@@ -36,12 +38,29 @@ const createAdmin = async () => {
     console.log('🔐 Hashing password...');
     const passwordHash = await hashPassword(adminPassword);
 
+    // Default permissions based on role
+    const defaultPermissions = adminRole === 'super_admin' 
+      ? [
+          'users:read',
+          'users:write', 
+          'users:delete',
+          'admins:read',
+          'admins:write',
+          'admins:delete',
+          'logs:read',
+          'stats:read',
+        ]
+      : ['users:read', 'users:write', 'logs:read', 'stats:read'];
+
     // Create admin
     console.log('👤 Creating admin user...');
-    const admin = await Admin.create({
-      email: adminEmail,
-      passwordHash,
-      role: adminRole,
+    const admin = await prisma.admin.create({
+      data: {
+        email: adminEmail,
+        passwordHash,
+        role: adminRole,
+        permissions: defaultPermissions,
+      },
     });
 
     console.log('\n✅ Admin user created successfully!\n');
@@ -52,10 +71,10 @@ const createAdmin = async () => {
     console.log(`   🎫 Permissions: ${admin.permissions.join(', ')}`);
     console.log('\n💡 You can now login to the admin dashboard with these credentials');
     console.log(`   POST http://localhost:${config.port}/api/admin/login`);
-    console.log('   Body: { "email": "admin@politikos.com", "password": "Admin123!" }\n');
+    console.log('   Body: { "email": "admin@mrrwebsite.com", "password": "Admin123!" }\n');
 
     // Close connection
-    await mongoose.connection.close();
+    await prisma.$disconnect();
     console.log('✅ Database connection closed');
   } catch (error) {
     console.error('❌ Error creating admin:', error);

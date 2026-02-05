@@ -1,4 +1,4 @@
-import Admin from '../models/Admin.model';
+import { prisma as adminPrisma } from '../models/Admin.model';
 import { prisma } from '../models/User.model';
 import { comparePassword } from './password.service';
 import { generateAccessToken } from './token.service';
@@ -40,8 +40,10 @@ export async function adminLogin(
   password: string
 ): Promise<AdminLoginResult> {
   try {
-    // Find admin by email and include password field
-    const admin = await Admin.findOne({ email }).select('+passwordHash');
+    // Find admin by email
+    const admin = await adminPrisma.admin.findUnique({ 
+      where: { email } 
+    });
 
     if (!admin) {
       return {
@@ -61,12 +63,11 @@ export async function adminLogin(
     }
 
     // Update last login timestamp
-    admin.lastLoginAt = new Date();
-    await admin.save();
+    await adminPrisma.admin.update({ where: { id: admin.id }, data: { lastLoginAt: new Date() } });
 
     // Generate JWT with admin role in payload
     const accessToken = generateAccessToken(
-      admin._id.toString(),
+      admin.id,
       admin.email,
       'admin',
       admin.role,
@@ -76,7 +77,7 @@ export async function adminLogin(
     return {
       success: true,
       admin: {
-        id: admin._id.toString(),
+        id: admin.id,
         email: admin.email,
         role: admin.role,
         permissions: admin.permissions,

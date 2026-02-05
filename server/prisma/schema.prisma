@@ -35,6 +35,19 @@ model User {
   @@map("users")
 }
 
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         AdminRole @default(admin)
+  permissions  String[]
+  lastLoginAt  DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("admins")
+}
+
 model OTP {
   id        String   @id @default(cuid())
   email     String
@@ -87,10 +100,28 @@ model Newsletter {
   @@map("newsletters")
 }
 
+model RateLimit {
+  id           String   @id @default(cuid())
+  ip           String
+  endpoint     String
+  requestCount Int      @default(1)
+  windowStart  DateTime @default(now())
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  @@unique([ip, endpoint])
+  @@map("rate_limits")
+}
+
 enum AuthProvider {
   email
   google
   facebook
+}
+
+enum AdminRole {
+  super_admin
+  admin
 }
 
 enum OTPPurpose {

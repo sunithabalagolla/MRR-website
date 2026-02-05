@@ -1,12 +1,12 @@
 export interface IAdmin {
-  _id: string;
+  id: string;
   email: string;
   passwordHash: string;
   role: 'super_admin' | 'admin';
   permissions: string[];
   createdAt: Date;
   updatedAt: Date;
-  lastLoginAt?: Date;
+  lastLoginAt?: Date | null;
 }
 
 export interface CreateAdminData {

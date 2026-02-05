@@ -1,9 +1,9 @@
-import { Document } from 'mongoose';
-
-export interface IRateLimit extends Document {
+export interface IRateLimit {
+  id: string;
   ip: string;
   endpoint: string;
   requestCount: number;
   windowStart: Date;
   expiresAt: Date;
+  createdAt: Date;
 }

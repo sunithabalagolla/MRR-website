@@ -1435,6 +1435,44 @@ carousel-item h1 {
     font-weight: 600;
     padding: 9px 18px;
 }
+.form-group {
+    margin-bottom: 20px;
+}
+.login-pd {
+    padding: 50px 150px 0px 150px;
+}
+.login-bg {
+    float: left;
+    width: 100%;
+    height: 100vh;
+    background: #F47216;
+}
+.pd-0 {
+    padding-left: 0;
+    padding-right: 0;
+}
+.login-pd {
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

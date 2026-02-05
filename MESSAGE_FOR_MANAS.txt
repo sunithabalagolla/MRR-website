@@ -1,0 +1,24 @@
+Hi Manas,
+
+The "Uploads are disabled" error happens because GitHub requires Git commands instead of web uploads for this repository.
+
+Please follow these steps:
+
+1. Install Git on your computer if you haven't already
+2. Clone the repository: 
+   git clone https://github.com/sunithabalagolla/MRR-website.git
+3. Switch to frontend branch: 
+   git checkout frontend-dev
+4. Work in the client/ folder (your frontend files are already there)
+5. When you make changes, use these commands:
+   git add .
+   git commit -m "describe your changes"
+   git push origin frontend-dev
+
+I've created detailed instructions in INSTRUCTIONS_FOR_MANAS.md file.
+
+The web interface upload won't work - you must use Git commands.
+
+Let me know if you need help with Git setup!
+
+- Sunitha

@@ -1,5 +1,5 @@
 import Admin from '../models/Admin.model';
-import User from '../models/User.model';
+import { prisma } from '../models/User.model';
 import { comparePassword } from './password.service';
 import { generateAccessToken } from './token.service';
 import { IUser } from '../types/user.types';

@@ -1,4 +1,4 @@
-import { prisma, IUserDocument } from '../models/User.model';
+import { prisma } from '../models/User.model';
 import { CreateUserData, IUser } from '../types/user.types';
 
 /**

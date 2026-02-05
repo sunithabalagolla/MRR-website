@@ -134,12 +134,12 @@ export const verifyOTPAndCompleteRegistration = async (
 
     // Generate tokens
     const accessToken = tokenService.generateAccessToken(
-      user._id.toString(),
+      user.id,
       user.email,
       user.authProvider
     );
     const refreshToken = tokenService.generateRefreshToken({
-      _id: user._id.toString(),
+      _id: user.id,
       email: user.email,
     });
 
@@ -153,7 +153,7 @@ export const verifyOTPAndCompleteRegistration = async (
       accessToken,
       refreshToken,
       user: {
-        id: user._id.toString(),
+        id: user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -197,23 +197,23 @@ export const registerWithGoogle = async (
 
       // Login existing Google user
       const accessToken = tokenService.generateAccessToken(
-        existingUser._id.toString(),
+        existinguser.id,
         existingUser.email,
         existingUser.authProvider
       );
       const refreshToken = tokenService.generateRefreshToken({
-        _id: existingUser._id.toString(),
+        _id: existinguser.id,
         email: existingUser.email,
       });
 
       // Update last login
-      await userRepository.updateLastLogin(existingUser._id.toString());
+      await userRepository.updateLastLogin(existinguser.id);
 
       return {
         accessToken,
         refreshToken,
         user: {
-          id: existingUser._id.toString(),
+          id: existinguser.id,
           email: existingUser.email,
           firstName: existingUser.firstName,
           lastName: existingUser.lastName,
@@ -236,12 +236,12 @@ export const registerWithGoogle = async (
 
     // Generate tokens
     const accessToken = tokenService.generateAccessToken(
-      newUser._id.toString(),
+      newuser.id,
       newUser.email,
       newUser.authProvider
     );
     const refreshToken = tokenService.generateRefreshToken({
-      _id: newUser._id.toString(),
+      _id: newuser.id,
       email: newUser.email,
     });
 
@@ -255,7 +255,7 @@ export const registerWithGoogle = async (
       accessToken,
       refreshToken,
       user: {
-        id: newUser._id.toString(),
+        id: newuser.id,
         email: newUser.email,
         firstName: newUser.firstName,
         lastName: newUser.lastName,
@@ -314,25 +314,25 @@ export const loginWithEmail = async (
 
     // Generate tokens
     const accessToken = tokenService.generateAccessToken(
-      user._id.toString(),
+      user.id,
       user.email,
       user.authProvider
     );
     const refreshToken = rememberMe
       ? tokenService.generateRefreshToken({
-          _id: user._id.toString(),
+          _id: user.id,
           email: user.email,
         })
       : undefined;
 
     // Update last login
-    await userRepository.updateLastLogin(user._id.toString());
+    await userRepository.updateLastLogin(user.id);
 
     return {
       accessToken,
       refreshToken,
       user: {
-        id: user._id.toString(),
+        id: user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -379,23 +379,23 @@ export const loginWithGoogle = async (
 
     // Generate tokens
     const accessToken = tokenService.generateAccessToken(
-      user._id.toString(),
+      user.id,
       user.email,
       user.authProvider
     );
     const refreshToken = tokenService.generateRefreshToken({
-      _id: user._id.toString(),
+      _id: user.id,
       email: user.email,
     });
 
     // Update last login
-    await userRepository.updateLastLogin(user._id.toString());
+    await userRepository.updateLastLogin(user.id);
 
     return {
       accessToken,
       refreshToken,
       user: {
-        id: user._id.toString(),
+        id: user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -442,7 +442,7 @@ export const refreshAccessToken = async (
 
     // Generate new access token
     const accessToken = tokenService.generateAccessToken(
-      user._id.toString(),
+      user.id,
       user.email,
       user.authProvider
     );
@@ -549,7 +549,7 @@ export const resetPassword = async (
     const newPasswordHash = await passwordService.hashPassword(newPassword);
 
     // Update password
-    await userRepository.updatePassword(user._id.toString(), newPasswordHash);
+    await userRepository.updatePassword(user.id, newPasswordHash);
 
     // TODO: Blacklist all existing tokens for this user (logout from all devices)
     // This would require tracking all user tokens, which we'll implement later if needed
@@ -620,7 +620,7 @@ export const changePassword = async (
     const newPasswordHash = await passwordService.hashPassword(newPassword);
 
     // Update password
-    await userRepository.updatePassword(user._id.toString(), newPasswordHash);
+    await userRepository.updatePassword(user.id, newPasswordHash);
 
     console.log(`✅ Password changed successfully for user: ${user.email}`);
 
@@ -668,23 +668,23 @@ export const registerWithFacebook = async (
 
       // Login existing Facebook user
       const accessToken = tokenService.generateAccessToken(
-        existingUser._id.toString(),
+        existinguser.id,
         existingUser.email,
         existingUser.authProvider
       );
       const refreshToken = tokenService.generateRefreshToken({
-        _id: existingUser._id.toString(),
+        _id: existinguser.id,
         email: existingUser.email,
       });
 
       // Update last login
-      await userRepository.updateLastLogin(existingUser._id.toString());
+      await userRepository.updateLastLogin(existinguser.id);
 
       return {
         accessToken,
         refreshToken,
         user: {
-          id: existingUser._id.toString(),
+          id: existinguser.id,
           email: existingUser.email,
           firstName: existingUser.firstName,
           lastName: existingUser.lastName,
@@ -707,12 +707,12 @@ export const registerWithFacebook = async (
 
     // Generate tokens
     const accessToken = tokenService.generateAccessToken(
-      newUser._id.toString(),
+      newuser.id,
       newUser.email,
       newUser.authProvider
     );
     const refreshToken = tokenService.generateRefreshToken({
-      _id: newUser._id.toString(),
+      _id: newuser.id,
       email: newUser.email,
     });
 
@@ -728,7 +728,7 @@ export const registerWithFacebook = async (
       accessToken,
       refreshToken,
       user: {
-        id: newUser._id.toString(),
+        id: newuser.id,
         email: newUser.email,
         firstName: newUser.firstName,
         lastName: newUser.lastName,
@@ -780,17 +780,17 @@ export const loginWithFacebook = async (
 
     // Generate tokens
     const accessToken = tokenService.generateAccessToken(
-      user._id.toString(),
+      user.id,
       user.email,
       user.authProvider
     );
     const refreshToken = tokenService.generateRefreshToken({
-      _id: user._id.toString(),
+      _id: user.id,
       email: user.email,
     });
 
     // Update last login
-    await userRepository.updateLastLogin(user._id.toString());
+    await userRepository.updateLastLogin(user.id);
 
     console.log(`✅ Facebook user logged in: ${user.email}`);
 
@@ -798,7 +798,7 @@ export const loginWithFacebook = async (
       accessToken,
       refreshToken,
       user: {
-        id: user._id.toString(),
+        id: user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,

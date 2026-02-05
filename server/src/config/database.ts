@@ -11,9 +11,8 @@ const connectDatabase = async (): Promise<void> => {
   try {
     console.log(`🔄 Connecting to PostgreSQL... (Attempt ${retryCount + 1}/${config.dbMaxRetries})`);
 
-    // Initialize Prisma Client with datasourceUrl for Prisma 7
+    // Initialize Prisma Client
     prisma = new PrismaClient({
-      datasourceUrl: config.databaseUrl,
       log: config.nodeEnv === 'development' ? ['query', 'info', 'warn', 'error'] : ['error'],
       errorFormat: 'pretty',
     });

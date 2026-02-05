@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.22.0",
     "axios": "^1.13.2",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
@@ -21,10 +22,8 @@
     "express-validator": "^7.3.1",
     "googleapis": "^166.0.0",
     "jsonwebtoken": "^9.0.2",
-    "pg": "^8.11.3",
-    "prisma": "^5.7.1",
-    "@prisma/client": "^5.7.1",
-    "nodemailer": "^7.0.11"
+    "nodemailer": "^7.0.11",
+    "pg": "^8.11.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
@@ -36,6 +35,7 @@
     "@types/pg": "^8.10.9",
     "fast-check": "^4.3.0",
     "nodemon": "^3.1.11",
+    "prisma": "^5.22.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "vitest": "^4.0.14"

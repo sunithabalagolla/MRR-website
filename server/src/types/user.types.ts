@@ -3,15 +3,15 @@ export interface IUser {
   email: string;
   firstName: string;
   lastName: string;
-  phoneNumber?: string;
-  profession?: string;
-  passwordHash?: string;
+  phoneNumber?: string | null;
+  profession?: string | null;
+  passwordHash?: string | null;
   authProvider: 'email' | 'google' | 'facebook';
-  googleId?: string;
-  facebookId?: string;
+  googleId?: string | null;
+  facebookId?: string | null;
   createdAt: Date;
   updatedAt: Date;
-  lastLoginAt?: Date;
+  lastLoginAt?: Date | null;
 }
 
 export interface CreateUserData {

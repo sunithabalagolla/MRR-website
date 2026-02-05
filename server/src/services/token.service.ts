@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken';
 import config from '../config/env.config';
-import BlacklistedToken from '../models/BlacklistedToken.model';
+import { prisma } from '../models/BlacklistedToken.model';
 import { TokenPayload } from '../types/token.types';
 
 /**
  * Token Service
- * Handles JWT token generation, validation, and blacklisting
+ * Handles JWT token generation, validation, and blacklisting using Prisma
  */
 
 /**
@@ -58,12 +58,12 @@ export const generateAccessToken = (
  * @returns JWT refresh token
  */
 export const generateRefreshToken = (user: {
-  _id: string;
+  id: string;
   email: string;
 }): string => {
   try {
     const payload = {
-      userId: user._id,
+      userId: user.id,
       email: user.email,
       type: 'refresh', // Mark as refresh token
     };
@@ -143,11 +143,12 @@ export const blacklistToken = async (
     const expiresAt = new Date(decoded.exp * 1000);
 
     // Add token to blacklist
-    await BlacklistedToken.create({
-      token: cleanToken,
-      userId,
-      blacklistedAt: new Date(),
-      expiresAt,
+    await prisma.blacklistedToken.create({
+      data: {
+        token: cleanToken,
+        userId,
+        expiresAt,
+      },
     });
 
     console.log(`✅ Token blacklisted for user ${userId}`);
@@ -168,8 +169,8 @@ export const isTokenBlacklisted = async (token: string): Promise<boolean> => {
     const cleanToken = token.startsWith('Bearer ') ? token.slice(7) : token;
 
     // Check if token exists in blacklist
-    const blacklistedToken = await BlacklistedToken.findOne({
-      token: cleanToken,
+    const blacklistedToken = await prisma.blacklistedToken.findUnique({
+      where: { token: cleanToken },
     });
 
     return blacklistedToken !== null;

@@ -1,0 +1,344 @@
+@media only screen and (max-width: 374px) {
+    
+}
+
+@media only screen and (max-width: 520px) {
+    
+    
+    .box {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 0px;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 30px;
+}
+    .menu {
+        display: none;
+    }
+    .menu-mobile {
+        display: block;
+        float: right;
+        margin-top: -47px;
+    }
+    .menu-mobile a {
+        border: 1px solid #E25F3C;
+        background: #E25F3C;
+        font-size: 14px;
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+    .logo-main a img {
+    width: 20%;
+    height: auto;
+}
+    .topmenu {
+    float: left;
+    width: 100%;
+    height: 40px;
+    background: #F26522;
+    padding: 10px 10px;
+}
+    .topmenulinks {
+        display: none;
+    }
+    
+    .bottommenu {
+    float: left;
+    width: 100%;
+    height: 68px;
+    background: #fff;
+    padding: 10px 10px;
+    border-bottom: 1px solid #e3e3e3;
+}
+    .mainmenu ul {
+    list-style: none;
+    margin: 10px 0px;
+    padding: 0;
+    display: none;
+}
+    .mainmenu {
+    float: right;
+    display: block;
+}
+    .hmenu {
+        display: block;
+    }
+    .hmenu a {
+        list-style: none;
+    }
+    .logo {
+    float: left;
+    width: 80%;
+}
+    .logo img {
+    float: left;
+    width: 13%;
+    margin-right: 10px;
+}
+    .logo-content {
+    float: left;
+    width: 70%;
+    margin-top: 0px;
+}
+    .logo h4 {
+    color: #7F4204;
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+    .logo p {
+    font-size: 11px;
+    font-weight: 300;
+    color: #7F4204;
+}
+    .carousel-item span {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    padding: 20px 20px 0px 20px;
+    width: 100%;
+    font-size: 12px;
+    font-weight: 600;
+    color: #f26522;
+    float: left;
+}
+    .carousel-control-prev {
+    left: 0;
+    top: 0px;
+}
+    .carousel-control-next {
+    right: 0;
+    top: 0px;
+}
+    .carousel-control-prev-icon {
+    background: url(../images/banner-left-nav.svg) center !important;
+    background-size: cover !important;
+    width: 32px;
+    height: 32px;
+}
+    .carousel-control-next-icon {
+    background: url(../images/banner-right-nav.svg) center !important;
+    background-size: cover !important;
+    width: 32px;
+    height: 32px;
+}
+    .carousel-inner {
+    position: relative;
+    width: 100%;
+    height: 25vh;
+    overflow: hidden;
+    position: relative;
+    top: 0px;
+}
+    .section-about {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background: #F4EEE5;
+}
+    .about-content {
+    margin-top: 20px;
+}
+    .about-content h2 {
+    font-size: 24px;
+    color: #333;
+}
+    .about-btn {
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+    .section-vision {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background: #ffffff;
+}
+    .visionimg {
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.visionlist p {
+    color: #7F4204;
+    font-size: 11px;
+    font-weight: 300;
+    margin-bottom: 0px;
+}
+    .visionlist h6 {
+    font-weight: 600;
+    color: #7F4204;
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+    .visiontext {
+    float: left;
+    padding: 5px 0px;
+    width: 80%;
+}
+    .section-peopleneeds {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background: #F26522;
+}
+    .box p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 20px;
+    padding: 0px 10px 0px 10px;
+}
+    .section-movements {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background: #F4EEE5;
+}
+    .section-movements h2 {
+    color: #F26522;
+    margin-bottom: 20px;
+}
+    .movement-box {
+        margin-bottom: 20px;
+    }
+.section-gallery {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background: #F4F4F4;
+}
+    .section-gallery h2 {
+    color: #F26522;
+    margin-bottom: 20px;
+}
+    .section-press {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background: #fff;
+}
+    .section-press h2 {
+    color: #F26522;
+    margin-bottom: 20px;
+}
+    .viewlink {
+        display: none;
+    }
+    .press1 img {
+    float: left;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+    .press1 .press-content {
+    float: left;
+    width: 100%;
+}
+    .press2 img {
+    float: left;
+    width: 20%;
+    margin-right: 20px;
+    border-radius: 0px;
+}
+    .section-trueleader {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background: #F4EEE5;
+}
+    .section-footer {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background: #F26522;
+}
+    .navpos {
+    margin-top: 0px;
+}
+    .sidenav a {
+    padding: 16px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff2c9;
+    display: block;
+    text-align: left;
+    transition: 0.3s;
+}
+    .about-img img {
+        
+    }
+    .innerbanner {
+    float: left;
+    width: 100%;
+    height: 30vh;
+    background: url(../images/inner-banner1.png) no-repeat center;
+    background-size: cover;
+    margin-top: 108px;
+}
+    .section {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background: #ffffff;
+}
+    .about-one h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+    .about-img1 {
+        margin-bottom: 20px;
+    }
+    .grp1 {
+    margin-bottom: 20px;
+}
+    table {
+        margin-bottom: 20px;
+    }
+    .innerbanner-content {
+    margin-top: 80px;
+    width: 100%;
+    text-align: center;
+}
+    .innerbanner-content h5 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #F26522;
+}
+    .innerbanner-content h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  }
